@@ -9,6 +9,8 @@ namespace TESTING
         DialogueSystem ds;
         TextArchitect architect;
 
+        public TextArchitect.BuildMethod bm = TextArchitect.BuildMethod.instant;
+
         string[] lines = new string[5]
         {
             "This is a random line of dialogue.",
@@ -22,13 +24,22 @@ namespace TESTING
         {
             ds = DialogueSystem.Instance;
             architect = new TextArchitect(ds.dialogueContainer.dialogueText);
-            architect.buildMethod = TextArchitect.BuildMethod.typewriter;
+            architect.buildMethod = TextArchitect.BuildMethod.fade;
             architect.speed = 0.5f;
         }
 
         // Update is called once per frame
         void Update()
         {
+            if (bm != architect.buildMethod)
+            {
+                architect.buildMethod = bm;
+                architect.Stop();
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha5)) {
+                architect.Stop();
+            }
+
             string longline = "this is a very long line that make no sense but I am just populating it with stuff.this is a very long line that make no sense but I am just populating it with stuff.this is a very long line that make no sense but I am just populating it with stuff.this is a very long line that make no sense but I am just populating it with stuff.this is a very long line that make no sense but I am just populating it with stuff.this is a very long line that make no sense but I am just populating it with stuff.";
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -42,13 +53,13 @@ namespace TESTING
                         architect.ForeceComplete();
                 }
                 else
-                architect.Build(longline);
-                //architect.Build(lines[Random.Range(0, lines.Length)]);
+                    //architect.Build(longline);
+                    architect.Build(lines[Random.Range(0, lines.Length)]);
             }
 
             else if (Input.GetKeyDown(KeyCode.A)) {
-                architect.Append(longline);
-                //architect.Append(lines[Random.Range(0, lines.Length)]);
+                //architect.Append(longline);
+                architect.Append(lines[Random.Range(0, lines.Length)]);
             }
         }
     }
