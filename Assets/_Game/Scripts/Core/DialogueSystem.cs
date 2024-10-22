@@ -4,5 +4,14 @@ using UnityEngine;
 
 public class DialogueSystem : MonoBehaviour
 {
-    [SerializeField] private DialogueContainer dialogueContainer = new DialogueContainer();
+    public static DialogueSystem Instance;
+
+    public DialogueContainer dialogueContainer = new DialogueContainer();
+
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else DestroyImmediate(gameObject);
+    }
 }
