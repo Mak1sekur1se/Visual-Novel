@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueSystem : MonoBehaviour
+namespace DIALOGUE
 {
-    public static DialogueSystem Instance;
-
-    public DialogueContainer dialogueContainer = new DialogueContainer();
-
-
-    private void Awake()
+    public class DialogueSystem : MonoBehaviour
     {
-        if (Instance == null) Instance = this;
-        else DestroyImmediate(gameObject);
+        public static DialogueSystem Instance;
+
+        public DialogueContainer dialogueContainer = new DialogueContainer();
+
+
+        private void Awake()
+        {
+            if (Instance == null) Instance = this;
+            else DestroyImmediate(gameObject);
+        }
     }
 }
