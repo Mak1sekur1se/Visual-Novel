@@ -18,7 +18,7 @@ public class TextArchitect
 
     //typeWirte一个一个显示可见的字符， fade都是可见逐渐调整透明度
     public enum BuildMethod { instant, typewriter, fade}
-    public BuildMethod buildMethod = BuildMethod.typewriter;
+    public BuildMethod buildMethod = BuildMethod.fade;
 
     public Color textColor { get { return tmpro.color; } set { tmpro.color = value; } }
 

@@ -7,7 +7,6 @@ namespace TESTING
 {
     public class TestParsing : MonoBehaviour
     {
-        [SerializeField] private TextAsset file;
         private void Start()
         {
             SendFileToParse();

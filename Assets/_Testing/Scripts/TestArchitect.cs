@@ -41,7 +41,6 @@ namespace TESTING
                 architect.Stop();
             }
 
-            string longline = "this is a very long line that make no sense but I am just populating it with stuff.this is a very long line that make no sense but I am just populating it with stuff.this is a very long line that make no sense but I am just populating it with stuff.this is a very long line that make no sense but I am just populating it with stuff.this is a very long line that make no sense but I am just populating it with stuff.this is a very long line that make no sense but I am just populating it with stuff.";
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (architect.isBuilding)
