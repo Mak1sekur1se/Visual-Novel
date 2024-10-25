@@ -6,7 +6,7 @@ namespace DIALOGUE
 {
     public class DialogueSystem : MonoBehaviour
     {
-        public static DialogueSystem Instance;
+        public static DialogueSystem Instance { get; private set; }
         public ConversationManager conversationManager;
         public DialogueContainer dialogueContainer = new DialogueContainer();
         public TextArchitect architect;

@@ -74,11 +74,10 @@ namespace DIALOGUE
         {
             //更新对话框展示或隐藏对话者名称
             if (line.hasSpeaker)
-                dialogueSystem.ShowSpeakerName(line.speaker);
-            else
-                dialogueSystem.HideSpeakerName();
+                dialogueSystem.ShowSpeakerName(line.speaker.castName);
+            //说话名字切换就行不用文字文件每一行都带说话者名字
 
-            yield return BuildDialogue(line.dialogue);
+            yield return BuildLineSegments(line.dialogue);
 
             //等待用户提示输入切换到下一行
             yield return WaitForUserInput();
@@ -90,8 +89,42 @@ namespace DIALOGUE
             yield return null;
         }
 
-        private IEnumerator BuildDialogue(string dialogue)
+        private IEnumerator BuildLineSegments(DL_DIALOGUE_DATA line )
         {
+            for (int i = 0; i < line.segments.Count; i++)
+            {
+                DL_DIALOGUE_DATA.DIALOGUE_SEGMENT segment = line.segments[i];
+
+                yield return WaitForDialogueSegmentSignalToBeTrigger(segment);
+
+                yield return BuildDialogue(segment.dialogue, segment.appendText);
+            }
+        }
+
+        private IEnumerator WaitForDialogueSegmentSignalToBeTrigger(DL_DIALOGUE_DATA.DIALOGUE_SEGMENT segment)
+        {
+            switch (segment.startSignal)
+            {
+                case DL_DIALOGUE_DATA.DIALOGUE_SEGMENT.StartSignal.C:
+                case DL_DIALOGUE_DATA.DIALOGUE_SEGMENT.StartSignal.A:
+                    //CA直接等待输入
+                    yield return WaitForUserInput();
+                    break;
+                case DL_DIALOGUE_DATA.DIALOGUE_SEGMENT.StartSignal.WA:
+                case DL_DIALOGUE_DATA.DIALOGUE_SEGMENT.StartSignal.WC:
+                    //等待
+                    yield return new WaitForSeconds(segment.signalDelay);
+                    break;
+                default: break;
+            }
+        }
+
+        private IEnumerator BuildDialogue(string dialogue, bool append = false)
+        {
+            if (!append)
+                architect.Build(dialogue);
+            else
+                architect.Append(dialogue);
             architect.Build(dialogue);
 
             while (architect.isBuilding)
