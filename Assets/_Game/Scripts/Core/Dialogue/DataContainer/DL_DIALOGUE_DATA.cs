@@ -10,8 +10,6 @@ public class DL_DIALOGUE_DATA
 
     public List<DIALOGUE_SEGMENT> segments;
 
-    public bool hasDialogue => segments.Count > 0;
-
 
     //字符串改为对话数据 speaker "dialogue Line 1{}Line 2{}Line3"
     public DL_DIALOGUE_DATA(string rawDialogue)

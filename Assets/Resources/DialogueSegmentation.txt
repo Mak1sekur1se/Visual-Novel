@@ -1,10 +1,10 @@
-Elen as ??? "Hello there"
+John "let's play some music!" playSong("Funky Beets" -v 0.75 -p 1), setMood(chill)
 
-Elen as ??? at 1:0 "Hello there"
+Elen "You have odd taste in music." playVoice("e_dl_v2" -v 1.5), setBackground(Room1 -t "Diagonal Lines" -s 3.5)
 
-Elen at 0.5:0.5 as The Gril "Hello there"
+setAccomplishment("A legendary Boombox" true), setCLI(Elen 0:Angle 1:Interigued -s 2.3 -l true)
 
-Elen as ??? [0:Angle1, 1:happy] at 0 "Hello there"
+showScene(false),stopMusic(all -s 1.5)
 
 
 

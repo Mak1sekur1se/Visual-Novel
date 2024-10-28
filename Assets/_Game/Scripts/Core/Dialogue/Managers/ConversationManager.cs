@@ -74,10 +74,10 @@ namespace DIALOGUE
         {
             //更新对话框展示或隐藏对话者名称
             if (line.hasSpeaker)
-                dialogueSystem.ShowSpeakerName(line.speaker.castName);
+                dialogueSystem.ShowSpeakerName(line.speakerData.castName);
             //说话名字切换就行不用文字文件每一行都带说话者名字
 
-            yield return BuildLineSegments(line.dialogue);
+            yield return BuildLineSegments(line.dialogueData);
 
             //等待用户提示输入切换到下一行
             yield return WaitForUserInput();
@@ -85,7 +85,7 @@ namespace DIALOGUE
         }
         private IEnumerator Line_RunCcommands(DIALOGUE_LINE line)
         {
-            Debug.Log(line.command);
+            Debug.Log(line.commandData);
             yield return null;
         }
 

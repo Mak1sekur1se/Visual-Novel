@@ -18,7 +18,6 @@ namespace TESTING
         {
             List<string> lines = FileManagers.ReadTextAsset(textFile, false);
 
-            //Test SPEAKER_DATA is Working
             //for (int i = 0; i < lines.Count; i++)
             //{
             //    string line = lines[i];
@@ -37,7 +36,22 @@ namespace TESTING
             //    }
             //}
 
-            DialogueSystem.Instance.Say(lines);
+            foreach (string line in lines)
+            {
+                if (string.IsNullOrWhiteSpace(line))
+                    continue;
+
+                DIALOGUE_LINE dl = DialogueParser.Parse(line);
+
+                for (int i = 0; i < dl.commandData.commands.Count; i++)
+                {
+                    DL_COMMAND_DATA.Command command = dl.commandData.commands[i];
+                    Debug.Log($"Command [{i}] '{command.name}' has arguments [{string.Join(",", command.arguments)}]");
+                }
+
+            }
+
+            //DialogueSystem.Instance.Say(lines);
         }
     }
 }
