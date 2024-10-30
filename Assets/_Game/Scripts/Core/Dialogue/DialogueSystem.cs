@@ -1,3 +1,4 @@
+using CHARACTERS;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,10 @@ namespace DIALOGUE
     public class DialogueSystem : MonoBehaviour
     {
         public static DialogueSystem Instance { get; private set; }
+
+        [SerializeField] private DialogueSystemConfigurationSO _config;
+        public DialogueSystemConfigurationSO config => _config;
+
         public ConversationManager conversationManager;
         public DialogueContainer dialogueContainer = new DialogueContainer();
         public TextArchitect architect;
@@ -43,8 +48,25 @@ namespace DIALOGUE
             onUserPrompt_Next?.Invoke();
         }
 
+        public void ApplySpeakerDataToDialogueContainer(string speakerName)
+        {
+            Character character = CharacterManager.Instance.GetCharacter(speakerName);
+            CharacterConfigData config = character != null ? character.config : CharacterManager.Instance.GetCharacterConfig(speakerName);
+
+            ApplySpeakerDataToDialogueContainer(config);
+        }
+
+        public void ApplySpeakerDataToDialogueContainer(CharacterConfigData config)
+        {
+            dialogueContainer.SetDialogueColor(config.dialogueColor);
+            dialogueContainer.SetDialogueFont(config.dialogueFont);
+            dialogueContainer.nameContainer.SetNameColor(config.nameColor);
+            dialogueContainer.nameContainer.SetNameFont(config.nameFont);
+        }
+
         public void ShowSpeakerName(string speakerName = "")
         {
+            Debug.Log($"ShowSpeakerName is '{speakerName}'");
             if (speakerName.ToLower() != "narrator")
                 dialogueContainer.nameContainer.Show(speakerName);
             else
@@ -52,15 +74,15 @@ namespace DIALOGUE
         }
         public void HideSpeakerName() => dialogueContainer.nameContainer.Hide();
 
-        public void Say(string speaker, string dialogue)
+        public Coroutine Say(string speaker, string dialogue)
         {
             List<string> conversation = new List<string>() { $"{speaker} \"{dialogue}\""};
-            Say(conversation);
+            return Say(conversation);
         }
 
-        public void Say(List<string> conversation)
+        public Coroutine Say(List<string> conversation)
         {
-            conversationManager.StartConversation(conversation);
+            return conversationManager.StartConversation(conversation);
         }
     }
 }

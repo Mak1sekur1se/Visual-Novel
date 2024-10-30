@@ -1,3 +1,9 @@
+print_lp("This is a command running straight from our dialogue file!")
+
+John "Move Left and then Right." print_lp("Start Moving"), [wait]moveCharDemo(left), [wait]moveCharDemo(right), print_lp("Done Moving")
+
+"Move Right" moveCharDemo(right)
+
 John "let's play some music!" playSong("Funky Beets" -v 0.75 -p 1), setMood(chill)
 
 Elen "You have odd taste in music." playVoice("e_dl_v2" -v 1.5), setBackground(Room1 -t "Diagonal Lines" -s 3.5)
@@ -5,6 +11,8 @@ Elen "You have odd taste in music." playVoice("e_dl_v2" -v 1.5), setBackground(R
 setAccomplishment("A legendary Boombox" true), setCLI(Elen 0:Angle 1:Interigued -s 2.3 -l true)
 
 showScene(false),stopMusic(all -s 1.5)
+
+
 
 
 

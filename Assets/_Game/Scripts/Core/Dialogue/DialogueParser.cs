@@ -8,7 +8,7 @@ namespace DIALOGUE
 {
     public class DialogueParser 
     {
-        private const string commandRegexPattern = @"\w*[^\s]\(";//使用字符需要\\w
+        private const string commandRegexPattern = @"[\w\[\]]*[^\s]\(";//使用字符需要\\w
         public static DIALOGUE_LINE Parse(string rawLine)
         {
             Debug.Log($"Parsing line - '{rawLine}'");
@@ -25,7 +25,7 @@ namespace DIALOGUE
         {
             //目标字符串1 Speaker "Dialogue \"Goes\" Here" Command(arguments go here)
             //目标字符串2 Elen "Let's listen to some music!" PlaySong("Ethereal Presence" -v 1 -p 0.3)
-            
+
             string speaker = string.Empty, dialogue = string.Empty, commands = string.Empty;
 
             int dialogueStart = -1;
@@ -58,17 +58,20 @@ namespace DIALOGUE
 
             //识别命令行
             Regex commandRegex = new Regex(commandRegexPattern);
-            Match match = commandRegex.Match(rawLine);
+            MatchCollection matches = commandRegex.Matches(rawLine);
 
             int commandStart = -1;
-            if (match.Success)
+            foreach (Match match in matches)
             {
-                commandStart = match.Index;
-                //String.Trim 移除开头结尾的空白字符
-                if (dialogueStart == -1 && dialogueEnd == -1)
-                    //这一行是没有对话的纯命令行
-                    return ("", "", rawLine.Trim());
+                if (match.Index < dialogueStart || match.Index > dialogueEnd)
+                {
+                    commandStart = match.Index;
+                    break;
+                }
             }
+
+            if (commandStart != -1 && (dialogueStart == -1 && dialogueEnd == -1))
+                return ("", "", rawLine.Trim());
 
             //要么是对话框要么是命令行中的多个词参数，分辨
             if (dialogueStart != -1 && dialogueEnd != -1 && (commandStart == -1 || commandStart > dialogueEnd))
@@ -84,7 +87,7 @@ namespace DIALOGUE
                 commands = rawLine;
             
             else
-                speaker = rawLine;
+                dialogue = rawLine;
 
 
             return (speaker, dialogue, commands);

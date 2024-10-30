@@ -1,3 +1,4 @@
+using COMMANDS;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,11 +27,13 @@ namespace DIALOGUE
             userPrompt = true;
         }
 
-        public void StartConversation(List<string> conversationn)
+        public Coroutine StartConversation(List<string> conversationn)
         {
             StopConversation();
 
             process = dialogueSystem.StartCoroutine(RunningConversation(conversationn));
+
+            return process;
         }
 
         public void StopConversation()
@@ -65,8 +68,9 @@ namespace DIALOGUE
                     yield return Line_RunCcommands(line);
                 }
 
-                //等待一秒 切换为手动
-                //yield return new WaitForSeconds(1f);
+                if (line.hasDialogue)
+                    //等待用户提示输入切换到下一行
+                    yield return WaitForUserInput();
             }
         }
 
@@ -74,18 +78,25 @@ namespace DIALOGUE
         {
             //更新对话框展示或隐藏对话者名称
             if (line.hasSpeaker)
-                dialogueSystem.ShowSpeakerName(line.speakerData.castName);
+                dialogueSystem.ShowSpeakerName(line.speakerData.displayname);
             //说话名字切换就行不用文字文件每一行都带说话者名字
 
             yield return BuildLineSegments(line.dialogueData);
 
-            //等待用户提示输入切换到下一行
-            yield return WaitForUserInput();
+
 
         }
         private IEnumerator Line_RunCcommands(DIALOGUE_LINE line)
         {
-            Debug.Log(line.commandData);
+            List<DL_COMMAND_DATA.Command> commands = line.commandData.commands;
+
+            foreach (DL_COMMAND_DATA.Command command in commands) 
+            {
+                if(command.waitForCompleting)
+                    yield return CommandManager.Instance.Execute(command.name, command.arguments);
+                else
+                    CommandManager.Instance.Execute(command.name, command.arguments);
+            }
             yield return null;
         }
 

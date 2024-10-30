@@ -8,12 +8,14 @@ public class DL_COMMAND_DATA
 {
     private const char COMMANDSPLITTER_ID = ',';
     private const char ARGUMENTSCONTAINER_ID = '(';
+    private const string WAITCOMMAND_ID = "[wait]";
 
     public List<Command> commands;
     public struct Command
     {
         public string name;
         public string[] arguments;
+        public bool waitForCompleting;
     }
 
     public DL_COMMAND_DATA(string rawCommands)
@@ -31,6 +33,15 @@ public class DL_COMMAND_DATA
             var command = new Command();
             int index = cmd.IndexOf(ARGUMENTSCONTAINER_ID);
             command.name = cmd.Substring(0, index).Trim();
+
+            if (command.name.ToLower().StartsWith(WAITCOMMAND_ID))
+            {
+                command.name = command.name.Substring(WAITCOMMAND_ID.Length);
+                command.waitForCompleting = true;
+            }
+            else
+                command.waitForCompleting = false;
+
             //PlaySong("SongName" - v 1 - p 1)
             command.arguments = GetArgs(cmd.Substring(index + 1, cmd.Length - index - 2));
             result.Add(command);
