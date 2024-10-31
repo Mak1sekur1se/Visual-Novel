@@ -11,8 +11,9 @@ namespace CHARACTERS
     {
         private const string CHARACTER_CASTING_ID = " as ";
         private const string CHARACTER_NAME_ID = "<charname>";
-        private string characterRootPath => $"Characters/{CHARACTER_NAME_ID}";
-        private string characterPrefabPath => $"{characterRootPath}/Character - [{CHARACTER_NAME_ID}]";
+        public string characterRootPathFormat => $"Characters/{CHARACTER_NAME_ID}";
+        public string characterPrefabPathFormat => $"{characterRootPathFormat}/Character - [{CHARACTER_NAME_ID}]";
+        public string characterPrefabNameFormat => $"Character - [{CHARACTER_NAME_ID}]";
         public static CharacterManager Instance { get; private set; }
         private Dictionary<string, Character> characters = new Dictionary<string, Character>();
 
@@ -69,23 +70,22 @@ namespace CHARACTERS
 
             result.castingName = nameData.Length > 1 ? nameData[1] : result.name;
 
-            
-
             result.config = config.GetConfig(result.castingName);
 
-
             result.prefab = GetPrefabForCharacter(result.castingName) ;
+
+            result.rootCharacterFolder = FormatCharacterPath(characterRootPathFormat, result.castingName);
 
             return result;
         }
 
         private GameObject GetPrefabForCharacter(string characterName)
         {
-            string prefabPath = FormatCharacterPath(characterPrefabPath, characterName);
+            string prefabPath = FormatCharacterPath(characterPrefabPathFormat, characterName);
             return Resources.Load<GameObject>(prefabPath);
         }
 
-        private string FormatCharacterPath(string path, string characterName) => path.Replace(CHARACTER_NAME_ID, characterName);
+        public string FormatCharacterPath(string path, string characterName) => path.Replace(CHARACTER_NAME_ID, characterName);
 
         private Character CreateCharacterFromInfo(CHARACTER_INFO info)
         {
@@ -97,11 +97,11 @@ namespace CHARACTERS
                     return new Character_Text(info.name, config);
                 case Character.CharacterType.SpriteSheet:
                 case Character.CharacterType.Sprite:
-                    return new Character_Sprite(info.name, config, info.prefab);
+                    return new Character_Sprite(info.name, config, info.prefab, info.rootCharacterFolder);
                 case Character.CharacterType.Live2D:
-                    return new Character_Live2D(info.name, config, info.prefab);
+                    return new Character_Live2D(info.name, config, info.prefab, info.rootCharacterFolder);
                 case Character.CharacterType.Model3D:
-                    return new Character_Model3D(info.name, config, info.prefab);
+                    return new Character_Model3D(info.name, config, info.prefab, info.rootCharacterFolder);
                 default:
                     return null;
             }
@@ -111,6 +111,8 @@ namespace CHARACTERS
         {
             public string name = "";
             public string castingName = "";
+
+            public string rootCharacterFolder = "";
 
             public CharacterConfigData config = null;
 

@@ -23,32 +23,10 @@ namespace TESTING
         private IEnumerator Test()
         {
             Character guard1 = CharacterManager.Instance.CreateCharacter("Guard1 as Generic");
-            Character guard2 = CharacterManager.Instance.CreateCharacter("Guard2 as Raelin");
-            Character guard3 = CharacterManager.Instance.CreateCharacter("Guard3 as Generic");
+            Character_Sprite student2 = CharacterManager.Instance.CreateCharacter("Female Student 2") as Character_Sprite;
+            Character_Sprite raelin = CharacterManager.Instance.CreateCharacter("Raelin") as Character_Sprite;
 
-            guard1.SetPosition(Vector2.zero);
-            //guard2.SetPosition(new Vector2(0.5f, 0.5f));
-            //guard3.SetPosition(Vector2.one);
-
-
-
-            yield return guard1.Show();
-
-
-            yield return guard1.MoveToPosition(new Vector2(1.5f, 1.5f), 0.66f, true);
-            yield return guard1.MoveToPosition(Vector2.zero);
-            guard2.Show();
-            guard3.Show();
-
-
-            guard1.SetDialogueFont(tempFont);
-            guard1.SetNameFont(tempFont);
-            guard2.SetDialogueColor(Color.cyan);
-            guard3.SetNameColor(Color.red);
-
-            yield return guard1.Say("I want to say something important.");
-            yield return guard2.Say("Hold your place.");
-            yield return guard3.Say("Let him speak...");
+           
 
             yield return null;
 

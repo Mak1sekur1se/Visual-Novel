@@ -3,7 +3,7 @@ guid: 418997cd131ebf84fac6b738543fe03f
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -20,11 +20,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
-  ignoreMasterTextureLimit: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -63,6 +64,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -116,7 +119,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Raelin_0
+      name: Raelin_Stand
       rect:
         serializedVersion: 2
         x: 5
@@ -124,7 +127,7 @@ TextureImporter:
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -137,7 +140,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_1
+      name: Raelin_Holding
       rect:
         serializedVersion: 2
         x: 488
@@ -145,7 +148,7 @@ TextureImporter:
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -158,7 +161,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_2
+      name: Raelin_SideWays
       rect:
         serializedVersion: 2
         x: 5
@@ -166,7 +169,7 @@ TextureImporter:
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -179,7 +182,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_3
+      name: Raelin_SideWaysHoldHand
       rect:
         serializedVersion: 2
         x: 488
@@ -187,7 +190,7 @@ TextureImporter:
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -200,7 +203,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_4
+      name: Raelin_Stand_Serious
       rect:
         serializedVersion: 2
         x: 5
@@ -208,7 +211,7 @@ TextureImporter:
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -221,15 +224,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_5
+      name: Raelin_SideWays_Serious
       rect:
         serializedVersion: 2
-        x: 488
-        y: 6512
+        x: 485
+        y: 6513
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -242,7 +245,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_6
+      name: Raelin_Stand_Shy
       rect:
         serializedVersion: 2
         x: 5
@@ -250,7 +253,7 @@ TextureImporter:
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -263,7 +266,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_7
+      name: Raelin_SideWays_Shy
       rect:
         serializedVersion: 2
         x: 488
@@ -271,7 +274,7 @@ TextureImporter:
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -284,15 +287,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_8
+      name: Raelin_Stand_Talk
       rect:
         serializedVersion: 2
-        x: 5
+        x: 3
         y: 5066
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -305,7 +308,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_9
+      name: Raelin_SideWays_Talk
       rect:
         serializedVersion: 2
         x: 488
@@ -313,7 +316,7 @@ TextureImporter:
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -326,7 +329,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_10
+      name: Raelin_Stand_Worry
       rect:
         serializedVersion: 2
         x: 5
@@ -334,7 +337,7 @@ TextureImporter:
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -347,7 +350,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_11
+      name: Raelin_SideWays_Worry
       rect:
         serializedVersion: 2
         x: 488
@@ -355,7 +358,7 @@ TextureImporter:
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -368,7 +371,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_12
+      name: Raelin_Stand_Happy
       rect:
         serializedVersion: 2
         x: 5
@@ -376,7 +379,7 @@ TextureImporter:
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -389,15 +392,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_13
+      name: Raelin_SideWays_Happy
       rect:
         serializedVersion: 2
-        x: 488
+        x: 487
         y: 3620
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -410,15 +413,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_14
+      name: Raelin_Stand_Normal
       rect:
         serializedVersion: 2
-        x: 5
+        x: 8
         y: 2897
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -431,7 +434,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_15
+      name: Raelin_SideWays_Normal
       rect:
         serializedVersion: 2
         x: 488
@@ -439,7 +442,7 @@ TextureImporter:
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -452,7 +455,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_16
+      name: Raelin_Stand_Scared
       rect:
         serializedVersion: 2
         x: 5
@@ -460,7 +463,7 @@ TextureImporter:
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -473,15 +476,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_17
+      name: Raelin_SideWays_Scared
       rect:
         serializedVersion: 2
-        x: 488
-        y: 2174
+        x: 487
+        y: 2173
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -494,7 +497,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_18
+      name: Raelin_Stand_Astonished
       rect:
         serializedVersion: 2
         x: 5
@@ -502,7 +505,7 @@ TextureImporter:
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -515,7 +518,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_19
+      name: Raelin_SideWays_Astonished
       rect:
         serializedVersion: 2
         x: 488
@@ -523,7 +526,7 @@ TextureImporter:
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -536,7 +539,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_20
+      name: Raelin_Stand_BitShy
       rect:
         serializedVersion: 2
         x: 5
@@ -544,7 +547,7 @@ TextureImporter:
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -557,7 +560,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_21
+      name: Raelin_SideWays_BitShy
       rect:
         serializedVersion: 2
         x: 488
@@ -565,7 +568,7 @@ TextureImporter:
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -578,7 +581,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_22
+      name: Raelin_Stand_Idle
       rect:
         serializedVersion: 2
         x: 5
@@ -586,7 +589,7 @@ TextureImporter:
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -599,7 +602,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Raelin_23
+      name: Raelin_SideWays_Idle
       rect:
         serializedVersion: 2
         x: 488
@@ -607,7 +610,7 @@ TextureImporter:
         width: 476
         height: 716
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -630,33 +633,32 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Raelin_11: -1818594040
-      Raelin_4: 877658820
-      Raelin_12: 752875108
-      Raelin_3: -984643779
-      Raelin_6: -231494423
-      Raelin_20: -12134526
-      Raelin_2: 2143271235
-      Raelin_9: 1731016576
-      Raelin_22: -831843799
-      Raelin_21: -899087398
-      Raelin_5: 1533307292
-      Raelin_23: 2079976379
-      Raelin_8: -861763730
-      Raelin_7: 455040721
-      Raelin_17: 2089198746
-      Raelin_16: 1148731873
-      Raelin_13: -810301392
-      Raelin_0: -539901293
-      Raelin_18: -819501888
-      Raelin_14: 1930344441
-      Raelin_19: -1330446141
-      Raelin_10: 1799884572
-      Raelin_1: 371039983
-      Raelin_15: -1720575887
-  spritePackingTag: 
+      Raelin_Holding: 371039983
+      Raelin_SideWays: 2143271235
+      Raelin_SideWaysHoldHand: -984643779
+      Raelin_SideWays_Astonished: -1330446141
+      Raelin_SideWays_BitShy: -899087398
+      Raelin_SideWays_Happy: -810301392
+      Raelin_SideWays_Idle: 2079976379
+      Raelin_SideWays_Normal: -1720575887
+      Raelin_SideWays_Scared: 2089198746
+      Raelin_SideWays_Serious: 1533307292
+      Raelin_SideWays_Shy: 455040721
+      Raelin_SideWays_Talk: 1731016576
+      Raelin_SideWays_Worry: -1818594040
+      Raelin_Stand: -539901293
+      Raelin_Stand_Astonished: -819501888
+      Raelin_Stand_BitShy: -12134526
+      Raelin_Stand_Happy: 752875108
+      Raelin_Stand_Idle: -831843799
+      Raelin_Stand_Normal: 1930344441
+      Raelin_Stand_Scared: 1148731873
+      Raelin_Stand_Serious: 877658820
+      Raelin_Stand_Shy: -231494423
+      Raelin_Stand_Talk: -861763730
+      Raelin_Stand_Worry: 1799884572
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
