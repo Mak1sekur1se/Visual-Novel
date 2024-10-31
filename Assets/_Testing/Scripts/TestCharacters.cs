@@ -10,9 +10,11 @@ namespace TESTING
     public class TestCharacters : MonoBehaviour
     {
         public TMP_FontAsset tempFont;
+
+        private Character CreateCharacter(string name) => CharacterManager.Instance.CreateCharacter(name);
         private void Start()
         {
-            //Character Stella = CharacterManager.Instance.CreateCharacter("Stella");
+            //Character Raelin = CharacterManager.Instance.CreateCharacter("Generic");
             //Character Adam = CharacterManager.Instance.CreateCharacter("Adam");
 
             StartCoroutine(Test());
@@ -20,38 +22,35 @@ namespace TESTING
 
         private IEnumerator Test()
         {
-            Character Elen = CharacterManager.Instance.CreateCharacter("Elen");
-            Character Adam = CharacterManager.Instance.CreateCharacter("Adam");
-            Character Ben = CharacterManager.Instance.CreateCharacter("Benjamin");
+            Character guard1 = CharacterManager.Instance.CreateCharacter("Guard1 as Generic");
+            Character guard2 = CharacterManager.Instance.CreateCharacter("Guard2 as Raelin");
+            Character guard3 = CharacterManager.Instance.CreateCharacter("Guard3 as Generic");
 
-            List<string> lines = new List<string>()
-            {
-                "Hi!",
-                "This is a line.",
-                "And another.",
-                "And a last one."
-            };
+            guard1.SetPosition(Vector2.zero);
+            //guard2.SetPosition(new Vector2(0.5f, 0.5f));
+            //guard3.SetPosition(Vector2.one);
 
-            yield return Elen.Say(lines);
 
-            Elen.SetNameColor(Color.red);
-            Elen.SetDialogueColor(Color.green);
-            Elen.SetNameFont(tempFont);
-            Elen.SetDialogueFont(tempFont);
 
-            yield return Elen.Say(lines);
+            yield return guard1.Show();
 
-            lines = new List<string>()
-            {
-                "I am Adam.",
-                "More lines{c} here."
-            };
 
-            yield return Adam.Say(lines);
+            yield return guard1.MoveToPosition(new Vector2(1.5f, 1.5f), 0.66f, true);
+            yield return guard1.MoveToPosition(Vector2.zero);
+            guard2.Show();
+            guard3.Show();
 
-            yield return Ben.Say("This is a line that I want to say.{a} It is a simple line.");
 
-            Debug.Log("Finished");
+            guard1.SetDialogueFont(tempFont);
+            guard1.SetNameFont(tempFont);
+            guard2.SetDialogueColor(Color.cyan);
+            guard3.SetNameColor(Color.red);
+
+            yield return guard1.Say("I want to say something important.");
+            yield return guard2.Say("Hold your place.");
+            yield return guard3.Say("Let him speak...");
+
+            yield return null;
 
         }
     }
