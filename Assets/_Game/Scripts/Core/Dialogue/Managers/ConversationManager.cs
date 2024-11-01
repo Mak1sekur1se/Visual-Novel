@@ -105,6 +105,8 @@ namespace DIALOGUE
             for (int i = 0; i < line.segments.Count; i++)
             {
                 DL_DIALOGUE_DATA.DIALOGUE_SEGMENT segment = line.segments[i];
+                Debug.Log($"segment is '{JsonUtility.ToJson(segment)}'");
+                Debug.Log($"isAppendText '{segment.appendText}'");
 
                 yield return WaitForDialogueSegmentSignalToBeTrigger(segment);
 
@@ -136,7 +138,6 @@ namespace DIALOGUE
                 architect.Build(dialogue);
             else
                 architect.Append(dialogue);
-            architect.Build(dialogue);
 
             while (architect.isBuilding)
             {

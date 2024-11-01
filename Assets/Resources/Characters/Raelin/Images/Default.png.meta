@@ -227,9 +227,9 @@ TextureImporter:
       name: Raelin_SideWays_Serious
       rect:
         serializedVersion: 2
-        x: 485
+        x: 488
         y: 6513
-        width: 476
+        width: 473
         height: 716
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -416,8 +416,8 @@ TextureImporter:
       name: Raelin_Stand_Normal
       rect:
         serializedVersion: 2
-        x: 8
-        y: 2897
+        x: 5
+        y: 2896
         width: 476
         height: 716
       alignment: 0

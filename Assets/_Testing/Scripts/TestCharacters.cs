@@ -23,33 +23,28 @@ namespace TESTING
         private IEnumerator Test()
         {
             //Character_Sprite guard1 = CharacterManager.Instance.CreateCharacter("Guard1 as Generic") as Character_Sprite;
-            //Character_Sprite student2 = CharacterManager.Instance.CreateCharacter("Female Student 2") as Character_Sprite;
+            Character_Sprite student2 = CharacterManager.Instance.CreateCharacter("Girl as Female Student 2") as Character_Sprite;
             Character_Sprite raelin = CharacterManager.Instance.CreateCharacter("Raelin") as Character_Sprite;
 
-            //guard1.Show();
+            student2.SetPosition(Vector2.zero);
+            raelin.SetPosition(new Vector2 (1, 0));
 
-            yield return new WaitForSeconds(1f);
+            raelin.UnHighlight();
+            yield return student2.Say("I want to say something");
 
-            yield return raelin.layers[1].TransitionColor(Color.red, 0.3f);
+            student2.UnHighlight();
+            raelin.Highlight();
+            yield return raelin.Say("But I want to say something too!{c}Can I go first?");
 
-            yield return new WaitForSeconds(1f);
+            student2.Highlight();
+            raelin.UnHighlight();
+            yield return student2.Say("Sure,{a} be my guest");
 
-            yield return raelin.layers[1].TransitionColor(Color.blue, 0.3f);
+            raelin.Highlight();
+            student2.UnHighlight();
+            raelin.TransitionSprite(raelin.GetSprite("Raelin_SideWays_BitShy"), layer: 1);
 
-            yield return new WaitForSeconds(1f);
-
-            yield return raelin.layers[1].TransitionColor(Color.yellow, 0.3f);
-
-            yield return new WaitForSeconds(1f);
-
-            yield return raelin.layers[1].TransitionColor(Color.black, 0.3f);
-
-            yield return new WaitForSeconds(1f);
-
-
-            //raelin.Show();
-
-            //Sprite raelingBodySprite = 
+            yield return raelin.Say("Yay!");
 
             yield return null;
 
