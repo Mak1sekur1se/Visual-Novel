@@ -15,27 +15,28 @@ namespace CHARACTERS
     {
         public const bool ENABLE_ON_START = true;
 
-        protected  CharacterManager manager => CharacterManager.Instance;
+        protected  CharacterManager characterManager => CharacterManager.Instance;
 
         public string name = "";
         public string displayName = "";
         public RectTransform root = null;
         public CharacterConfigData config;
         public Animator animator;
+        public Color color { get; protected set; } = Color.white;
 
         public DialogueSystem dialogueSystem => DialogueSystem.Instance;
 
         //Coroutines
         protected Coroutine co_revealing, co_hiding;
         protected Coroutine co_moving;
-
+        protected Coroutine co_changingColor;
         public bool isMoving => co_moving != null;
         /// <summary>
         /// ÕýÔÚShowCharacter
         /// </summary>
         public bool isRevealing => co_revealing != null;
         public bool isHiding => co_hiding != null;
-
+        public bool isChangingColor => co_changingColor != null;
         public virtual bool isVisible { get; set; }
 
         public Character(string name, CharacterConfigData config, GameObject prefab)
@@ -46,8 +47,8 @@ namespace CHARACTERS
 
             if (prefab != null)
             {
-                GameObject ob = Object.Instantiate(prefab, manager.characterPanel);
-                ob.name = manager.FormatCharacterPath(manager.characterPrefabNameFormat, name);
+                GameObject ob = Object.Instantiate(prefab, characterManager.characterPanel);
+                ob.name = characterManager.FormatCharacterPath(characterManager.characterPrefabNameFormat, name);
                 ob.SetActive(true);
                 root = ob.GetComponent<RectTransform>();
                 animator = root.GetComponentInChildren<Animator>();
@@ -78,9 +79,9 @@ namespace CHARACTERS
                 return co_revealing;
 
             if (isHiding)
-                manager.StopCoroutine(co_hiding);
+                characterManager.StopCoroutine(co_hiding);
 
-            co_revealing = manager.StartCoroutine(ShowingOrHiding(true));
+            co_revealing = characterManager.StartCoroutine(ShowingOrHiding(true));
 
             return co_revealing;
 
@@ -93,9 +94,9 @@ namespace CHARACTERS
                 return co_hiding;
 
             if (isRevealing)
-                manager.StopCoroutine(co_revealing);
+                characterManager.StopCoroutine(co_revealing);
 
-            co_hiding = manager.StartCoroutine(ShowingOrHiding(false));
+            co_hiding = characterManager.StartCoroutine(ShowingOrHiding(false));
 
             return co_hiding;
         }
@@ -118,8 +119,8 @@ namespace CHARACTERS
                 return null;
 
             if (isMoving)
-                manager.StopCoroutine(co_moving);
-            co_moving = manager.StartCoroutine(MovingToPosition(position, speed, smooth));
+                characterManager.StopCoroutine(co_moving);
+            co_moving = characterManager.StartCoroutine(MovingToPosition(position, speed, smooth));
 
             return co_moving;
         }
@@ -138,7 +139,7 @@ namespace CHARACTERS
                     i = 1/speed;
                 root.anchorMin = smooth ?
                     Vector2.Lerp(startAnchorMin, minAnchorTarget, speed *  i)
-                    : Vector2.MoveTowards(root.anchorMin, minAnchorTarget, speed * Time.deltaTime * 0.35f);
+                    : Vector2.MoveTowards(root.anchorMin, minAnchorTarget, speed * Time.deltaTime * 0.35f);// not linear
                 root.anchorMax = root.anchorMin + padding;
                 i += 0.01f;
 
@@ -160,7 +161,28 @@ namespace CHARACTERS
             return (minAnchorTarget, maxAnchorTarget);
         }
 
+        public virtual void SetColor(Color color)
+        {
+            this.color = color;
+        }
 
+        public Coroutine TransitionColor(Color color, float speed = 1f)
+        {
+            this.color = color;
+
+            if (isChangingColor)
+                characterManager.StopCoroutine(co_changingColor);
+
+            co_changingColor = characterManager.StartCoroutine(ChangingColor(color, speed));
+
+            return co_changingColor;
+        }
+
+        public virtual IEnumerator ChangingColor(Color color, float speed)
+        {
+            Debug.Log("Color changing is not applicable on this character type!");
+            yield return null;
+        }
 
         public virtual IEnumerator ShowingOrHiding(bool show)
         {

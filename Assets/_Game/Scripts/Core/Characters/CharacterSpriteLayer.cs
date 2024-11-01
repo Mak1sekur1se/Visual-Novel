@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace CHARACTERS
 {
@@ -25,9 +26,11 @@ namespace CHARACTERS
 
         private Coroutine co_transitioningLayer = null;
         private Coroutine co_levelingAlpha = null;
+        private Coroutine co_changingColor = null;
 
         public bool isTransitioningLayer => co_transitioningLayer != null;
         public bool isLevelingAlpha => co_levelingAlpha != null;
+        public bool isChangingColor => co_changingColor != null;
 
         public CharacterSpriteLayer(Image defaultRenderer, int layer = 0)
         {
@@ -54,6 +57,7 @@ namespace CHARACTERS
             return co_transitioningLayer;
         }
 
+        //切换通过创建一个新的 一定会生成在最下面
         private IEnumerator TransitioningSprite(Sprite sprite, float speedMultiplier)
         {
             transitionSpeedMultiplier = speedMultiplier;
@@ -113,6 +117,56 @@ namespace CHARACTERS
             }
 
             co_levelingAlpha = null;
+        }
+
+        public void SetColor(Color color)
+        {
+            renderer.color = color;
+
+            foreach (CanvasGroup oldCG in oldRenderers)
+            {
+                oldCG.GetComponent<Image>().color = color;
+            }
+        }
+
+        public Coroutine TransitionColor(Color color, float speed)
+        {
+            if (isChangingColor)
+                characterManager.StopCoroutine(co_changingColor);
+
+            co_changingColor = characterManager.StartCoroutine(ChangingColor(color, speed));
+
+            return co_changingColor;
+
+        }
+
+        //逐渐改变
+        private IEnumerator ChangingColor(Color color, float speedMultiplier)
+        {
+            Color oldColor = renderer.color;
+            List<Image> oldImages = new List<Image>();
+
+            foreach (var oldCG in oldRenderers) 
+            {
+                oldImages.Add(oldCG.GetComponent<Image>());
+            }
+
+            float colorPercent = 0;
+            while (colorPercent < 1) 
+            {
+                colorPercent += DEFAULT_TRANSITION_SPEED * speedMultiplier * Time.deltaTime;
+
+                renderer.color = Color.Lerp(oldColor, color, colorPercent);
+
+                foreach (Image oldImage in oldImages)
+                {
+                    oldImage.color = renderer.color;
+                }
+
+                yield return null;
+            }
+
+            co_changingColor = null;
         }
     }
 }

@@ -28,19 +28,23 @@ namespace TESTING
 
             //guard1.Show();
 
-            raelin.isVisible = false;
-
-            raelin.Show();
-
-            Sprite bodySprite = raelin.GetSprite("Raelin_SideWays");
-            Sprite faceIdleSprite = raelin.GetSprite("Raelin_SideWays_Worry");
-
-            //raelin.SetSprite(bodySprite, 0);
-            //raelin.SetSprite(faceIdleSprite, 1);
             yield return new WaitForSeconds(1f);
-            yield return raelin.TransitionSprite(faceIdleSprite, 1, 0.3f);
-            raelin.TransitionSprite(bodySprite, 0, 0.3f);
-            Debug.Log("Switch To IdleFinish");
+
+            yield return raelin.layers[1].TransitionColor(Color.red, 0.3f);
+
+            yield return new WaitForSeconds(1f);
+
+            yield return raelin.layers[1].TransitionColor(Color.blue, 0.3f);
+
+            yield return new WaitForSeconds(1f);
+
+            yield return raelin.layers[1].TransitionColor(Color.yellow, 0.3f);
+
+            yield return new WaitForSeconds(1f);
+
+            yield return raelin.layers[1].TransitionColor(Color.black, 0.3f);
+
+            yield return new WaitForSeconds(1f);
 
 
             //raelin.Show();
