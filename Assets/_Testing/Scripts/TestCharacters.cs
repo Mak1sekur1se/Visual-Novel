@@ -22,11 +22,30 @@ namespace TESTING
 
         private IEnumerator Test()
         {
-            Character guard1 = CharacterManager.Instance.CreateCharacter("Guard1 as Generic");
-            Character_Sprite student2 = CharacterManager.Instance.CreateCharacter("Female Student 2") as Character_Sprite;
+            //Character_Sprite guard1 = CharacterManager.Instance.CreateCharacter("Guard1 as Generic") as Character_Sprite;
+            //Character_Sprite student2 = CharacterManager.Instance.CreateCharacter("Female Student 2") as Character_Sprite;
             Character_Sprite raelin = CharacterManager.Instance.CreateCharacter("Raelin") as Character_Sprite;
 
-           
+            //guard1.Show();
+
+            raelin.isVisible = false;
+
+            raelin.Show();
+
+            Sprite bodySprite = raelin.GetSprite("Raelin_SideWays");
+            Sprite faceIdleSprite = raelin.GetSprite("Raelin_SideWays_Worry");
+
+            //raelin.SetSprite(bodySprite, 0);
+            //raelin.SetSprite(faceIdleSprite, 1);
+            yield return new WaitForSeconds(1f);
+            yield return raelin.TransitionSprite(faceIdleSprite, 1, 0.3f);
+            raelin.TransitionSprite(bodySprite, 0, 0.3f);
+            Debug.Log("Switch To IdleFinish");
+
+
+            //raelin.Show();
+
+            //Sprite raelingBodySprite = 
 
             yield return null;
 

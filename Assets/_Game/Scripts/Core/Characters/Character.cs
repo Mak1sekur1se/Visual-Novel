@@ -13,6 +13,8 @@ namespace CHARACTERS
 
     public abstract class Character
     {
+        public const bool ENABLE_ON_START = true;
+
         protected  CharacterManager manager => CharacterManager.Instance;
 
         public string name = "";
@@ -28,10 +30,13 @@ namespace CHARACTERS
         protected Coroutine co_moving;
 
         public bool isMoving => co_moving != null;
+        /// <summary>
+        /// ÕýÔÚShowCharacter
+        /// </summary>
         public bool isRevealing => co_revealing != null;
         public bool isHiding => co_hiding != null;
 
-        public virtual bool isVisible => false;
+        public virtual bool isVisible { get; set; }
 
         public Character(string name, CharacterConfigData config, GameObject prefab)
         {
