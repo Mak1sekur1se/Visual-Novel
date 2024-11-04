@@ -166,5 +166,23 @@ namespace CHARACTERS
 
             co_highlighting = null;
         }
+
+        public override IEnumerator FaceDirection(bool faceLeft, float speedMultiplier, bool immediate)
+        {
+            foreach (CharacterSpriteLayer layer in layers)
+            {
+                if (isFacingLeft)
+                    layer.FaceLeft(speedMultiplier, immediate);
+                else
+                    layer.FaceRight(speedMultiplier, immediate);
+            }
+
+            yield return null;
+
+            while (layers.Any( l => l.isFlipping))
+                yield return null;
+
+            co_flipping = null;
+        }
     }
 }

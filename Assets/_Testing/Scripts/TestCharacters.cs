@@ -29,6 +29,11 @@ namespace TESTING
             student2.SetPosition(Vector2.zero);
             raelin.SetPosition(new Vector2 (1, 0));
 
+            yield return new WaitForSeconds(1f);
+
+            yield return raelin.Flip(0.3f);
+            yield return student2.Flip(immediate: true);
+
             raelin.UnHighlight();
             yield return student2.Say("I want to say something");
 
