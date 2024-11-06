@@ -1,5 +1,6 @@
 using DIALOGUE;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace CHARACTERS
@@ -36,8 +37,12 @@ namespace CHARACTERS
 
         public Character GetCharacter(string characterName, bool createIfDoesNotExist = false)
         {
+
+            //存的名字不对
             if (characters.ContainsKey(characterName.ToLower()))
+            {
                 return characters[characterName.ToLower()];
+            }
             else if (createIfDoesNotExist)
                 return CreateCharacter(characterName);
 
@@ -54,8 +59,7 @@ namespace CHARACTERS
             CHARACTER_INFO info = GetCharaterInfo(characterName);
 
             Character character = CreateCharacterFromInfo(info);
-
-            characters.Add(characterName.ToLower(), character);
+            characters.Add(info.name.ToLower(), character);
 
             return character;
         }
@@ -104,6 +108,56 @@ namespace CHARACTERS
                     return new Character_Model3D(info.name, config, info.prefab, info.rootCharacterFolder);
                 default:
                     return null;
+            }
+        }
+
+        public void SortCharacters()
+        {
+            //排除场景中每个Active == false的角色
+            List<Character> activeCharacters = characters.Values.Where( c => c.root.gameObject.activeInHierarchy && c.isVisible).ToList();
+            List<Character> inactiveCharacters = characters.Values.Except(activeCharacters).ToList();
+
+            activeCharacters.Sort((a, b) => a.priority.CompareTo(b.priority));//升序排列
+
+            SortCharacters(activeCharacters);
+        }
+
+        public void SortCharacters(string[] characterNames)
+        {
+
+            // 通过名字排序，characterNamse数组中最前面的在屏幕最前面
+            //var sortedCharacters = new List<Character>();
+            var sortedCharacters = characterNames
+                .Select(name => GetCharacter(name))
+                .Where(character => character != null)
+                .ToList();
+
+
+            List<Character> remainingCharacters = characters.Values
+                .Except(sortedCharacters)
+                .OrderBy(character => character.priority)
+                .ToList();
+            //修改准备排序的Priority
+            //原始队列上的最大优先级为新队列另一个角色的最大优先级 输入全部名字会清除优先级
+            sortedCharacters.Reverse();
+            int startingPriority = remainingCharacters.Count > 0 ? remainingCharacters.Max( character => character.priority ) : 0;
+            for (int i = 0; i < sortedCharacters.Count; i++)
+            {
+                Character character = sortedCharacters[i];
+                character.SetPriority(startingPriority + i + 1, autoSetCharactersOnUI: false);
+            }
+            List<Character> allCharacters = remainingCharacters.Concat(sortedCharacters).ToList();
+            SortCharacters(allCharacters); 
+        }
+
+        private void SortCharacters(List<Character> charactersSortingOrder) 
+        {
+            //inActive的设置为最后面
+            int i = 0;
+            foreach (Character character in charactersSortingOrder) 
+            {
+                Debug.Log($"{character.name} priority is '{character.priority}'");
+                character.root.SetSiblingIndex(i++);
             }
         }
 
